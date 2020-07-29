@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+    <link REL="SHORTCUT ICON" HREF="{% static "favicon.ico" %}"/>
+</head>
+<body style="height: 100%; margin: 0;text-align: center">
+
+
+<div id="container" style="margin:0 auto;width:50%;height: 60%;">
+
+</div>
+
+<form action="/add/" method="get" id="Iform">
+    {% csrf_token %}
+    <input type="text" name="country" id="country">
+    <br>
+    <button type="button" id='click'>提交</button>
+</form>
+
+
+<script src={% static "COVID_19Analyse/jss/jquery.min.js" %}></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+<script src="{% static 'COVID_19Analyse/js/theme.js' %}"></script>
+<script src="{% static 'COVID_19Analyse/js/CensusCountry.js' %}"></script>
+
+
+<script>
+    $.ajaxSetup({
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}'},
+    });
+
+    $("#click").click(function () {
+        $.ajax({
+            url: "{% url 'Analyse:getLastMonthDataByCountry'%}",
+            type: "POST",
+            data: $("#Iform").serialize(),
+            success: function (data) {
+                str = "";
+                console.log(data);
+                $("#result").html("");
+                var date = Array();
+                var confirm_add = Array();
+                var confirm = Array();
+                var dead = Array();
+                var heal = Array();
+                $.each(data, function (i, tmp) {
+                    date.push(tmp.date);
+                    confirm_add.push(tmp.confirm_add);
+                    dead.push(tmp.dead);
+                    heal.push(tmp.heal);
+                    confirm.push(tmp.confirm - tmp.heal - tmp.dead);
+                });
+                var datas = Array();
+                datas[0] = date.reverse();
+                console.log(typeof date[1]);
+                datas[1] = confirm.reverse();
+                datas[2] = heal.reverse();
+                datas[3] = dead.reverse();
+                datas[0].unshift("情况");
+                datas[1].unshift("确诊人数");
+                datas[2].unshift("治愈人数");
+                datas[3].unshift("死亡人数");
+                console.log(datas);
+                b = datas[0][1];
+                show("container", datas, b);
+
+            }
+        });
+    });
+</script>
+</body>
+</html>

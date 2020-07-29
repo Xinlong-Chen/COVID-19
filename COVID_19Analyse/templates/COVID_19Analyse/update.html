@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{% url 'covid19:update' %}" method="post">
+    {% csrf_token %}
+    <button>更新</button>
+</form>
+</body>
+</html>

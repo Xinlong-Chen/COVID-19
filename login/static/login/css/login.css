@@ -1,0 +1,21 @@
+body {
+  height: 100%;
+  background-image: url('../image/bg.jpeg')
+}
+.form-login {
+  width: 100%;
+  max-width: 370px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-group {
+  margin-bottom: 5px;
+}
+.gap{
+  margin-top: 10px;
+}
+form a{
+  display: inline-block;
+  margin-top:25px;
+  line-height: 10px;
+}
