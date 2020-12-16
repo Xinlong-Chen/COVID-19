@@ -51,16 +51,21 @@ python manage.py crontab add
 ---
 ### 问题汇总：
 Q：Step 1所说的代理IP池是个什么东西？
+
 A：首先先弄清楚IP是什么，知道常用的反爬虫手段，及如何反制反爬虫（代理IP就是伪装一下自己，相当于你手里一堆身份证，拿着别人的身份证去买火车票），具体建议Google或者百度。
 
 Q：Step 5的crontab是个什么东西？
+
 A：crontab主要用于定时执行，疫情数据肯定要定时爬取啦！手动爬取多low啊！可以参考Blog：https://blog.csdn.net/hrbust_cxl/article/details/106887045
 
 Q：为什么我crontab用不了？
+
 A：同学你可能是Windows操作系统嗷，crontab一般是Unix系统用滴（linux或者Mac OS）
 
 Q：我是Windows的os想跑这个项目怎么办？
+
 A：两个解决办法。第一，仔细看urls中，有个update的url，可以手动刷新哦，你就手动刷新吧，别装逼了；第二，虚拟机，装Linux（Ubantu，Cent OS皆可）
 
 Q：我想改一下这个项目，该如何去改呢？
+
 A：从数据的流向分析，数据的来源已经解决，你要是想分析别的东西（比如画点别的图），现在用Django操作数据库，取出相关数据，Ajax方式发送给前端，前端使用Echarts绘图即可。
