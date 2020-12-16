@@ -45,4 +45,6 @@ python manage.py migrate
 python manage.py crontab add 
  ```
 6. 启动*Django*，查看localhost即可查看结果。
-
+---
+### 项目运行结果：
+可参考：https://blog.csdn.net/hrbust_cxl/article/details/106894626
